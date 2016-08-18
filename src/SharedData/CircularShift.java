@@ -7,10 +7,19 @@ public class CircularShift {
 	
 	private static final String TOKEN = " ";
 	
-	public ArrayList<String> processCircularShift(ArrayList<String> titles,
-			HashSet<String> wordsToIgnore) {
-		ArrayList<String> results = new ArrayList<String>();
-		
+	private Storage storage;
+	private ArrayList<String> titles;
+	private HashSet<String> wordsToIgnore;
+	private ArrayList<String> results;
+	
+	public CircularShift() {
+		storage = Storage.getInstance();
+		titles = storage.getTitles();
+		wordsToIgnore = storage.getWordsToIgnore();
+		results = new ArrayList<String>();
+	}
+	
+	public void shift() {
 		for(String title : titles) {
 			String head = title.split(TOKEN)[0].toLowerCase().trim();
 			if(!wordsToIgnore.contains(head)) {
@@ -34,7 +43,7 @@ public class CircularShift {
 			} 
 		}
 		
-		return results;
+		storage.setResults(results);
 	}
 	
 	private String formatTitle(String[] current) {

@@ -1,0 +1,45 @@
+package SharedData;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+
+public class Storage {
+
+	private static Storage storage;
+	private ArrayList<String> titles;
+	private HashSet<String> wordsToIgnore;
+	private ArrayList<String> results;
+	
+	public static Storage getInstance() {
+		if(storage == null) {
+			storage = new Storage();
+		}
+		
+		return storage;
+	}
+	
+	public ArrayList<String> getTitles() {
+		return titles;
+	}
+	
+	public void setTitles(ArrayList<String> titles) {
+		this.titles = titles;
+	}
+	
+	public HashSet<String> getWordsToIgnore() {
+		return wordsToIgnore;
+	}
+	
+	public void setWordsToIgnore(HashSet<String> wordsToIgnore) {
+		this.wordsToIgnore = wordsToIgnore;
+	}
+	
+	public ArrayList<String> getResults() {
+		return results;
+	}
+	
+	public void setResults(ArrayList<String> results) {
+		this.results = results;
+	}
+	
+}

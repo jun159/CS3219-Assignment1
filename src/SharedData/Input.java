@@ -11,16 +11,23 @@ public class Input {
 	private static final String TOKEN = ",";
 	
 	private Scanner sc;
+	private Storage storage;
 	private ArrayList<String> titles;
 	private HashSet<String> wordsToIgnore;
 	
 	public Input() {
 		sc = new Scanner(System.in);
+		storage = Storage.getInstance();
 		titles = new ArrayList<String>();
 		wordsToIgnore = new HashSet<String>();
 	}
+	
+	public void input() {
+		storage.setTitles(getTitles());
+		storage.setWordsToIgnore(getWordsToIgnore());
+	}
 
-	public ArrayList<String> getTitles() {
+	private ArrayList<String> getTitles() {
 		System.out.print(MESSAGE_TITLE);
 		String[] titleArray = sc.nextLine().split(TOKEN);
 		for(String title : titleArray) {
@@ -30,7 +37,7 @@ public class Input {
 		return titles;
 	}
 	
-	public HashSet<String> getWordsToIgnore() {
+	private HashSet<String> getWordsToIgnore() {
 		System.out.print(MESSAGE_WORDS_TO_IGNORE);
 		String[] wordsToIgnoreArray = sc.nextLine().split(TOKEN);
 		for(String wordToIgnore : wordsToIgnoreArray) {
