@@ -16,11 +16,11 @@ public class Alphabetizer {
 	
 	public void sort() {
 		Collections.sort(results, new Comparator<String>() {
-            public int compare(String left, String right) {
-                return left.compareTo(right);
-            }        
-        });;
-        storage.setResults(results);
+			public int compare(String left, String right) {
+				return left.compareTo(right);
+			}
+		});;
+		storage.setResults(results);
 	}
 	
 }
