@@ -5,33 +5,37 @@ import java.util.HashSet;
 
 public class CircularShift {
 	
-	private static final String TOKEN = " ";
+	private static final String TOKEN_SPACE = " ";
 	
 	private Storage storage;
-	private ArrayList<String> titles;
 	private HashSet<String> wordsToIgnore;
+	private ArrayList<String> titles;
 	private ArrayList<String> results;
 	
 	public CircularShift() {
 		storage = Storage.getInstance();
-		titles = storage.getTitles();
 		wordsToIgnore = storage.getWordsToIgnore();
+		titles = storage.getTitles();
 		results = new ArrayList<String>();
 	}
 	
 	public void shift() {
 		for(String title : titles) {
-			String head = title.split(TOKEN)[0].toLowerCase().trim();
+			String[] splitTitle = title.split(TOKEN_SPACE);
+			String head = splitTitle[0].toLowerCase().trim();
+			int size = splitTitle.length;
+			int headIndex = 0;
+			
 			if(!wordsToIgnore.contains(head)) {
 				results.add(title);
 			}
 			
 			while(true) {
-				String[] current = shiftWords(title.split(TOKEN));
+				String[] current = shiftWords(title.split(TOKEN_SPACE));
 				String resultTitle = formatTitle(current);
 				String currentHead = current[0].toLowerCase().trim();
 				
-				if(!currentHead.equals(head)) {
+				if((++headIndex % size) != 0) {
 					if(!wordsToIgnore.contains(currentHead)) {
 						results.add(resultTitle);
 					}
@@ -46,16 +50,6 @@ public class CircularShift {
 		storage.setResults(results);
 	}
 	
-	private String formatTitle(String[] current) {
-		String title = "";
-		
-		for(String word : current) {
-			title += word + " ";
-		}
-		
-		return title;
-	}
-	
 	private String[] shiftWords(String[] shifted) {
 		String[] current = new String[shifted.length];
 		int length = shifted.length;
@@ -65,5 +59,15 @@ public class CircularShift {
 		}
 		
 		return current;
+	}
+	
+	private String formatTitle(String[] current) {
+		StringBuilder title = new StringBuilder();
+		
+		for(String word : current) {
+			title.append(word).append(TOKEN_SPACE);
+		}
+		
+		return title.toString();
 	}
 }
