@@ -6,9 +6,10 @@ import java.util.Scanner;
 
 public class Input {
 
-	private static final String MESSAGE_WORDS_TO_IGNORE = "Enter a list of words to ignore (Use comma to separate each word): ";
-	private static final String MESSAGE_TITLE = "Enter a list of titles (Use comma to separate each title): ";
-	private static final String TOKEN_COMMA = ",";
+	private static final String MESSAGE_OUTPUT_FILE = "Enter the output file name: ";
+	private static final String MESSAGE_OUTPUT_FILE_EMPTY = "Invalid file name, please try again: ";
+	private static final String MESSAGE_WORDS_TO_IGNORE = "\nEnter words to ignore, separated by each line (Terminate input by entering empty line): ";
+	private static final String MESSAGE_TITLE = "Enter titles, separated by each line (Terminate input by entering empty line): ";
 	private static final String TOKEN_SPACE = " ";
 	private static final String REGEX = "\\s+";
 	
@@ -27,28 +28,44 @@ public class Input {
 	public void input() {
 		storage.setWordsToIgnore(getWordsToIgnore());
 		storage.setTitles(getTitles());
+		storage.setOutputFileName(getOutputFileName());
+	}
+	
+	private String getOutputFileName() {
+		System.out.print(MESSAGE_OUTPUT_FILE);
+		String outputFile;
+		
+		while((outputFile = sc.nextLine()).isEmpty()) {
+			System.out.print(MESSAGE_OUTPUT_FILE_EMPTY);
+		}
+		
+		return outputFile;
 	}
 	
 	private HashSet<String> getWordsToIgnore() {
-		System.out.print(MESSAGE_WORDS_TO_IGNORE);
-		String[] wordsToIgnoreArray = sc.nextLine().split(TOKEN_COMMA);
-		for(String wordToIgnore : wordsToIgnoreArray) {
-			wordsToIgnore.add(wordToIgnore.toLowerCase().replaceAll(REGEX, TOKEN_SPACE).trim());
-		}
+		System.out.println(MESSAGE_WORDS_TO_IGNORE);
+		String input = sc.nextLine();
+		
+		while (!input.isEmpty()) {
+			wordsToIgnore.add(input.toLowerCase().replaceAll(REGEX, TOKEN_SPACE).trim());
+            input = sc.nextLine();
+        }
 		
 		return wordsToIgnore;
 	}
 	
 	private ArrayList<String> getTitles() {
-		System.out.print(MESSAGE_TITLE);
-		String[] titleArray = sc.nextLine().replaceAll(REGEX, TOKEN_SPACE).split(TOKEN_COMMA);
-		for(String title : titleArray) {
-			String[] splitTitle = title.split(TOKEN_SPACE);
+		System.out.println(MESSAGE_TITLE);
+		String input = sc.nextLine();
+		
+		while (!input.isEmpty()) {
+			String[] splitTitle = input.split(TOKEN_SPACE);
 			StringBuilder currentTitle = new StringBuilder();
 			for(String word : splitTitle) {
 				currentTitle.append(formatWord(word.toLowerCase().trim())).append(TOKEN_SPACE);
 			}
 			titles.add(currentTitle.toString().trim());
+			input = sc.nextLine();
 		}
 		
 		return titles;

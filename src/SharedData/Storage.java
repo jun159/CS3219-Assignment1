@@ -6,9 +6,11 @@ import java.util.HashSet;
 public class Storage {
 
 	private static Storage storage;
+	
 	private HashSet<String> wordsToIgnore;
 	private ArrayList<String> titles;
 	private ArrayList<String> results;
+	private String outputFileName;
 	
 	public static Storage getInstance() {
 		if(storage == null) {
@@ -40,6 +42,14 @@ public class Storage {
 	
 	public void setResults(ArrayList<String> results) {
 		this.results = results;
+	}
+
+	public String getOutputFileName() {
+		return outputFileName;
+	}
+
+	public void setOutputFileName(String outputFileName) {
+		this.outputFileName = outputFileName;
 	}
 	
 }
