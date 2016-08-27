@@ -40,14 +40,15 @@ public class Main {
 		long endTime = 0;
 		boolean isValid = true;
 		
-		if (architecture.equals(ARCHITECTURE_SHARED_DATA)) {
-			shareddata.MasterControl masterControl = new shareddata.MasterControl();
-			masterControl.execute();
-			endTime = System.currentTimeMillis();
-			System.out.println(MESSAGE_EXECUTION + (endTime - startTime) + MESSAGE_UNIT + "\n");
-			selectContinueProgram();
-		} else if (architecture.equals(ARCHITECTURE_ADT)) {
-			// TODO - Insert MasterControl from another architecture
+		if (architecture.equals(ARCHITECTURE_SHARED_DATA) || architecture.equals(ARCHITECTURE_ADT)) {
+			if (architecture.equals(ARCHITECTURE_SHARED_DATA)) {
+				shareddata.MasterControl masterControl = new shareddata.MasterControl();
+				masterControl.execute();
+			} else if (architecture.equals(ARCHITECTURE_ADT)) {
+				pipeandfilter.MasterControl masterControl = new pipeandfilter.MasterControl();
+				masterControl.execute();
+			}
+			
 			endTime = System.currentTimeMillis();
 			System.out.println(MESSAGE_EXECUTION + (endTime - startTime) + MESSAGE_UNIT + "\n");
 			selectContinueProgram();
