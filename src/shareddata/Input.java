@@ -17,7 +17,6 @@ public class Input {
 	private static final String MESSAGE_INPUT_FILE_TITLES = "Enter the input file name for titles (Separate each title by new line): ";
 	private static final String MESSAGE_OUTPUT_FILE = "Enter the output file name: ";
 	private static final String MESSAGE_ERROR_FILE = ">> Error: Invalid file name, please try again: ";
-	private static final String MESSAGE_ERROR = ">> Error: An error occured when reading the file. Please try again.";
 	private static final String TOKEN_SPACE = " ";
 	private static final String REGEX = "\\s+";
 	
@@ -37,12 +36,12 @@ public class Input {
 		storage.setWordsToIgnore(getWordsToIgnore());
 		storage.setTitles(getTitles());
 		System.out.print(MESSAGE_OUTPUT_FILE);
-		storage.setOutputFileName(getFileName());
+		storage.setOutputFileName(getFileName(false));
 	}
 	
 	private HashSet<String> getWordsToIgnore() {
 		System.out.print(MESSAGE_INPUT_FILE_WORDS);
-		String inputFileName = getFileName();
+		String inputFileName = getFileName(true);
 		
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(inputFileName));
@@ -51,7 +50,8 @@ public class Input {
 				wordsToIgnore.add(word.toLowerCase().replaceAll(REGEX, TOKEN_SPACE).trim());
 	        }
 		} catch(IOException e) {
-			System.out.println(MESSAGE_ERROR);
+			System.out.println(MESSAGE_ERROR_FILE);
+			return null;
 		}
 		
 		return wordsToIgnore;
@@ -59,7 +59,7 @@ public class Input {
 	
 	private ArrayList<String> getTitles() {
 		System.out.print(MESSAGE_INPUT_FILE_TITLES);
-		String inputFileName = getFileName();
+		String inputFileName = getFileName(true);
 		
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(inputFileName));
@@ -73,13 +73,14 @@ public class Input {
 				titles.add(currentTitle.toString().replaceAll(REGEX, TOKEN_SPACE).trim());
 	        }
 		} catch(IOException e) {
-			System.out.println(MESSAGE_ERROR);
+			System.out.println(MESSAGE_ERROR_FILE);
+			return null;
 		}
 		
 		return titles;
 	}
 	
-	private String getFileName() {
+	private String getFileName(boolean isInput) {
 		
 		boolean isScan = true;
 		String fileName = "";
@@ -88,22 +89,31 @@ public class Input {
 			fileName = sc.nextLine();
 			if(fileName.isEmpty()) {
 				System.out.print(MESSAGE_ERROR_FILE);
-			} else if(isFileNameValid(fileName)) {
+			} else if(isFileNameValid(fileName, isInput)) {
 				isScan = false;
+			} else {
+				System.out.print(MESSAGE_ERROR_FILE);
 			}
 		}
 		
 		return fileName;
 	}
 	
-	private boolean isFileNameValid(String outputFile) {
+	private boolean isFileNameValid(String fileName, boolean isInput) {
+		File file = new File(fileName);
 		boolean isValid = true;
 		
-		try{
-			new FileWriter(new File(outputFile), true);
-		} catch(IOException e) {
-			System.out.print(MESSAGE_ERROR_FILE);
-			isValid = false;
+		if(isInput) {
+			if(!(file.exists() && !file.isDirectory())) { 
+			    isValid = false;
+			}
+		} else {
+			try{
+				new FileWriter(file, true);
+			} catch(IOException e) {
+				System.out.print(MESSAGE_ERROR_FILE);
+				isValid = false;
+			}
 		}
 		
 		return isValid;
