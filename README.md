@@ -1,4 +1,4 @@
-CS3219-Assignment1 - KWIC
+CS3219 Assignment1 - KWIC
 ==============================================
 
 ### Intro
@@ -7,10 +7,10 @@ KWIC is a system that outputs alphabetically sorted list of circularly shifted l
 ### Instructions to run KWIC system
 
 #### 1. Run on Eclipse
-1) Make sure that Java 8 is installed in Eclipse.
+- Make sure that Java 8 is installed in Eclipse.
 
 #### 2. Run on command line
-1) Go to the directory that contains ```Main.java```.
+1) Go to the directory that contains ```Main.java```.<br />
 2) Run the following:
 ```
 javac Main.java
@@ -18,12 +18,12 @@ java Main
 ```
 
 ### Interface
-1) Select an architecture to run: 1) Shared Data or 2) Pipe and Filter.
-2) Enter a valid input file name for words to ignore. The file must exist in the src folder.
-3) Enter a valid input file name for titles. The file must exist in the src folder.
-4) Enter a valid output file name. If no directory is specified, the output file will be stored in the src folder.
-5) The total execution time for the architecture will be displayed.
-6) Select either 'y' for yes to continue using the system or 'n' for no to terminate the system.
+1) Select an architecture to run: 1) Shared Data or 2) Pipe and Filter.<br />
+2) Enter a valid input file name for words to ignore. The file must exist in the src folder.<br />
+3) Enter a valid input file name for titles. The file must exist in the src folder.<br />
+4) Enter a valid output file name. If no directory is specified, the output file will be stored in the src folder.<br />
+5) The total execution time for the architecture will be displayed.<br />
+6) Select either 'y' for yes to continue using the system or 'n' for no to terminate the system.<br />
 
 ```
 Welcome to KWIC system.
