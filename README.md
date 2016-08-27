@@ -4,12 +4,9 @@ CS3219 Assignment1 - KWIC
 ### Intro
 KWIC is a system that outputs alphabetically sorted list of circularly shifted lines generated from a list of titles. Each title will be circularly shifted repeatedly by removing the first word and appending at the end of the line.
 
-### Instructions to run KWIC system
+### Instructions to run KWIC system on 
 
-#### 1. Run on Eclipse
-- Make sure that Java 8 is installed in Eclipse.
-
-#### 2. Run on command line
+#### Run on command-line interface
 - Go to the directory that contains ```Main.java```.<br />
 - Run the following:
 ```
