@@ -70,6 +70,6 @@ public class CircularShift {
 			title.append(word).append(TOKEN_SPACE);
 		}
 		
-		return title.toString();
+		return title.toString().trim();
 	}
 }
