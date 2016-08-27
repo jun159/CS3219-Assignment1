@@ -88,7 +88,7 @@ public class Input {
 			for(String word : splitTitle) {
 				currentTitle.append(formatWord(word.toLowerCase().trim())).append(TOKEN_SPACE);
 			}
-			titles.add(currentTitle.toString().trim());
+			titles.add(currentTitle.toString().replaceAll(REGEX, TOKEN_SPACE).trim());
 			input = sc.nextLine();
 		}
 		
