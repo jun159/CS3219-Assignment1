@@ -7,7 +7,7 @@ public class Main {
 	private static final String MESSAGE_WELCOME = "Welcome to KWIC system.";
 	private static final String MESSAGE_ARCHITECTURE = "\n\nPlease select the architecture of your choice, either '1' or '2':\n"
 			+ "1. Shared Data Architecture\n"
-			+ "2. Abstract Data Type Architecture\n"
+			+ "2. Pipe and Filter Architecture\n"
 			+ "Enter your choice: ";
 	private static final String MESSAGE_ARCHITECTURE_INVALID = ">> Error: You have entered an invalid response. ";
 	private static final String MESSAGE_CONTINUE = "Would you like to continue using the system? (y/n): ";

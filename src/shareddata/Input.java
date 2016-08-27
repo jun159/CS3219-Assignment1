@@ -2,7 +2,9 @@
 
 package shareddata;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,10 +13,11 @@ import java.util.Scanner;
 
 public class Input {
 
-	private static final String MESSAGE_OUTPUT_FILE = "\nEnter the output file name: ";
-	private static final String MESSAGE_WORDS_TO_IGNORE = "\nEnter words to ignore, separate each word by new line (Terminate input by entering empty line): ";
-	private static final String MESSAGE_TITLE = "Enter titles, separate each title by new line (Terminate input by entering empty line): ";
-	private static final String MESSAGE_ERROR_OUTPUT_FILE = ">> Error: Invalid file name, please try again: ";
+	private static final String MESSAGE_INPUT_FILE_WORDS = "\nEnter the input file name for words to ignore (Separate each word by new line): ";
+	private static final String MESSAGE_INPUT_FILE_TITLES = "Enter the input file name for titles (Separate each title by new line): ";
+	private static final String MESSAGE_OUTPUT_FILE = "Enter the output file name: ";
+	private static final String MESSAGE_ERROR_FILE = ">> Error: Invalid file name, please try again: ";
+	private static final String MESSAGE_ERROR = ">> Error: An error occured when reading the file. Please try again.";
 	private static final String TOKEN_SPACE = " ";
 	private static final String REGEX = "\\s+";
 	
@@ -31,26 +34,66 @@ public class Input {
 	}
 	
 	public void input() {
-		storage.setOutputFileName(getOutputFileName());
 		storage.setWordsToIgnore(getWordsToIgnore());
 		storage.setTitles(getTitles());
+		System.out.print(MESSAGE_OUTPUT_FILE);
+		storage.setOutputFileName(getFileName());
 	}
 	
-	private String getOutputFileName() {
-		System.out.print(MESSAGE_OUTPUT_FILE);
+	private HashSet<String> getWordsToIgnore() {
+		System.out.print(MESSAGE_INPUT_FILE_WORDS);
+		String inputFileName = getFileName();
+		
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(inputFileName));
+			String word;
+			while ((word = br.readLine()) != null) {
+				wordsToIgnore.add(word.toLowerCase().replaceAll(REGEX, TOKEN_SPACE).trim());
+	        }
+		} catch(IOException e) {
+			System.out.println(MESSAGE_ERROR);
+		}
+		
+		return wordsToIgnore;
+	}
+	
+	private ArrayList<String> getTitles() {
+		System.out.print(MESSAGE_INPUT_FILE_TITLES);
+		String inputFileName = getFileName();
+		
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(inputFileName));
+			String title;
+			while ((title = br.readLine()) != null) {
+				String[] splitTitle = title.split(TOKEN_SPACE);
+				StringBuilder currentTitle = new StringBuilder();
+				for(String word : splitTitle) {
+					currentTitle.append(formatWord(word.toLowerCase().trim())).append(TOKEN_SPACE);
+				}
+				titles.add(currentTitle.toString().replaceAll(REGEX, TOKEN_SPACE).trim());
+	        }
+		} catch(IOException e) {
+			System.out.println(MESSAGE_ERROR);
+		}
+		
+		return titles;
+	}
+	
+	private String getFileName() {
+		
 		boolean isScan = true;
-		String outputFile = "";
+		String fileName = "";
 		
 		while(isScan) {
-			outputFile = sc.nextLine();
-			if(outputFile.isEmpty()) {
-				System.out.print(MESSAGE_ERROR_OUTPUT_FILE);
-			} else if(isFileNameValid(outputFile)) {
+			fileName = sc.nextLine();
+			if(fileName.isEmpty()) {
+				System.out.print(MESSAGE_ERROR_FILE);
+			} else if(isFileNameValid(fileName)) {
 				isScan = false;
 			}
 		}
 		
-		return outputFile;
+		return fileName;
 	}
 	
 	private boolean isFileNameValid(String outputFile) {
@@ -59,40 +102,11 @@ public class Input {
 		try{
 			new FileWriter(new File(outputFile), true);
 		} catch(IOException e) {
-			System.out.print(MESSAGE_ERROR_OUTPUT_FILE);
+			System.out.print(MESSAGE_ERROR_FILE);
 			isValid = false;
 		}
 		
 		return isValid;
-	}
-	
-	private HashSet<String> getWordsToIgnore() {
-		System.out.println(MESSAGE_WORDS_TO_IGNORE);
-		String input = sc.nextLine();
-		
-		while (!input.isEmpty()) {
-			wordsToIgnore.add(input.toLowerCase().replaceAll(REGEX, TOKEN_SPACE).trim());
-            input = sc.nextLine();
-        }
-		
-		return wordsToIgnore;
-	}
-	
-	private ArrayList<String> getTitles() {
-		System.out.println(MESSAGE_TITLE);
-		String input = sc.nextLine();
-		
-		while (!input.isEmpty()) {
-			String[] splitTitle = input.split(TOKEN_SPACE);
-			StringBuilder currentTitle = new StringBuilder();
-			for(String word : splitTitle) {
-				currentTitle.append(formatWord(word.toLowerCase().trim())).append(TOKEN_SPACE);
-			}
-			titles.add(currentTitle.toString().replaceAll(REGEX, TOKEN_SPACE).trim());
-			input = sc.nextLine();
-		}
-		
-		return titles;
 	}
 	
 	private String formatWord(String word) {
