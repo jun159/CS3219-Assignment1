@@ -31,7 +31,7 @@ Enter your choice: 1
 Enter the input file name for words to ignore 
 >> Ensure file is in src folder and separate each word by new line: word.txt
 Enter the input file name for titles 
->> Ensure file is in src folder and separate each word by new line: title.txt
+>> Ensure file is in src folder and separate each title by new line: title.txt
 Enter the output file name: shareddata.txt
 >>> Output is saved in file: shareddata.txt
 Total execution time: 14855 ms
@@ -47,7 +47,7 @@ Enter your choice: 2
 Enter the input file name for words to ignore 
 >> Ensure file is in src folder and separate each word by new line: word.txt
 Enter the input file name for titles 
->> Ensure file is in src folder and separate each word by new line: title.txt
+>> Ensure file is in src folder and separate each title by new line: title.txt
 Enter the output file name: pipeandfilter.txt       
 >>> Output is saved in "pipeandfilter.txt"
 Total execution time: 14855 ms

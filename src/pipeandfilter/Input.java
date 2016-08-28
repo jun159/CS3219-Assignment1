@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class Input extends Filter{
 	
 	private static final String MESSAGE_INPUT_FILE_WORDS = "\nEnter the input file name for words to ignore \n>> Ensure file is in src folder and separate each word by new line: ";
-	private static final String MESSAGE_INPUT_FILE_TITLES = "Enter the input file name for titles \n>> Ensure file is in src folder and separate each word by new line: ";
+	private static final String MESSAGE_INPUT_FILE_TITLES = "Enter the input file name for titles \n>> Ensure file is in src folder and separate each title by new line: ";
 	private static final String MESSAGE_OUTPUT_FILE = "Enter the output file name: ";
 	private static final String MESSAGE_ERROR_FILE = ">> Error: Invalid file name, please try again: ";
 	private static final String REGEX = "\\s+";
