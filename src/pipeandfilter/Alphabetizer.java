@@ -5,7 +5,7 @@ package pipeandfilter;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Alphabetizer extends Filter {
+public class Alphabetizer extends Filter{
 
 	static ArrayList<String> sortedShiftedTitles = new ArrayList<String>();
 	static ArrayList<String> allShiftedTitles = new ArrayList<String>();
@@ -24,15 +24,6 @@ public class Alphabetizer extends Filter {
 		
 		Collections.sort(allShiftedTitles, String.CASE_INSENSITIVE_ORDER);
 		
-		/* alternative method, if required 
-		Collections.sort(allShiftedTitles, new Comparator<String>() {
-	        @Override
-	        public int compare(String s1, String s2) {
-	            return s1.compareToIgnoreCase(s2);
-	        }
-	    });
-	    */
 	}
 
 }
-
