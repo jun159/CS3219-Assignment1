@@ -14,6 +14,8 @@ public class Connections {
 		pipeline.addFilter(new Sink());
 		
 		pipeline.setPipeline();
+		
+		pipeline.run();
 	}
 
 }
