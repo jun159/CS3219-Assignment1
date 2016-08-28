@@ -49,7 +49,7 @@ Enter the input file name for words to ignore
 Enter the input file name for titles 
 >> Ensure file is in src folder and separate each title by new line: title.txt
 Enter the output file name: pipeandfilter.txt       
->>> Output is saved in "pipeandfilter.txt"
+>>> Output is saved in file: pipeandfilter.txt
 Total execution time: 14855 ms
 
 Would you like to continue using the system? (y/n): n

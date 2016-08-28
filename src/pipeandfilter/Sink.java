@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class Sink extends Filter {
 	
-	private static final String MESSAGE_OUTPUT = ">>> Output is saved in \"%1$s\"";
+	private static final String MESSAGE_OUTPUT = ">>> Output is saved in file: %1$s";
 	private ArrayList<String> sortedShiftedTitles = new ArrayList<String>();
 	private String outputFileName;
 	
