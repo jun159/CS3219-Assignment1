@@ -17,11 +17,7 @@ public class Alphabetizer {
 	}
 	
 	public void sort() {
-		Collections.sort(results, new Comparator<String>() {
-			public int compare(String left, String right) {
-				return left.compareTo(right);
-			}
-		});;
+		Collections.sort(results, String.CASE_INSENSITIVE_ORDER);
 		storage.setResults(results);
 	}
 	
